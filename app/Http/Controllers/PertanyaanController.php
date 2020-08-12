@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Pertanyaan;
-
+use Auth;
 class PertanyaanController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     //
     public function create() {
         return view('pertanyaan.create');
@@ -30,7 +33,8 @@ class PertanyaanController extends Controller
         // $pertanyaan->save();
         $pertanyaan = Pertanyaan::create([
             "judul" => $request["judul"],
-            "isi" => $request["isi"]
+            "isi" => $request["isi"],
+            "user_id" => Auth::id()
         ]);
         return redirect('/pertanyaan')->with('success', 'Successfully Saved!');
     }

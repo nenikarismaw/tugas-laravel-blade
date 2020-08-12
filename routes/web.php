@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 // Route::get('/master', function () {
 //     return view('layout.master');
 // });
@@ -26,8 +26,8 @@
 //     return view('items.create');
 // });
 
-Route::get('/', 'DataController@index');
-Route::get('/data-tables', 'DataController@tables');
+// Route::get('/', 'DataController@index');
+// Route::get('/data-tables', 'DataController@tables');
 
 // Route::get('/pertanyaan', 'PertanyaanController@index');
 // Route::get('/pertanyaan/create', 'PertanyaanController@create');
@@ -37,4 +37,7 @@ Route::get('/data-tables', 'DataController@tables');
 // Route::put('/pertanyaan/{id}', 'PertanyaanController@update');
 // Route::delete('pertanyaan/{id}', 'PertanyaanController@destroy');
 
-Route::resource('pertanyaan', 'PertanyaanController'); 
+Route::resource('pertanyaan', 'PertanyaanController')->middleware('auth'); 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
